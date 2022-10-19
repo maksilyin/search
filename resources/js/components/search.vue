@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="search">
         <div class="row gy-4 mb-5">
             <div class="col-12">
                 <Input v-model="formData.name" type = "text" label = "Название" />
@@ -81,7 +81,7 @@ export default {
 
             axios.get('/api/house/search', {params: formData})
                 .then((response) => {
-                    console.log(response)
+                    this.$emit('search', response.data)
                 })
                 .finally(() => {
                     this.isLoading = false
@@ -92,7 +92,14 @@ export default {
 </script>
 
 <style scoped>
+    .search {
+        position: relative;
+    }
     .preload {
+        position: absolute;
         text-align: center;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
     }
 </style>
